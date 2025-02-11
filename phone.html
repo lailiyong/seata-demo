@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>填写信息后打开短信应用</title>
+</head>
+
+<body>
+    <form id="smsForm">
+        <label for="phoneNumber">接收方手机号码:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+        <label for="messageContent" hidden="true">短信内容:</label>
+        <textarea id="messageContent" hidden="true" name="messageContent" required>这是固定的内容，联系雷欧修改</textarea><br>
+        <button type="button" onclick="openSmsApp()">发送短信</button>
+    </form>
+
+    <script>
+        function openSmsApp() {
+            // 获取表单中的手机号码和短信内容
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const messageContent = document.getElementById('messageContent').value;
+
+            // 构建短信链接
+            let smsLink = `sms:${phoneNumber}`;
+            if (messageContent) {
+                smsLink += `?body=${encodeURIComponent(messageContent)}`;
+            }
+
+            // 打开链接
+            window.location.href = smsLink;
+        }
+    </script>
+</body>
+
+</html>
